@@ -12,13 +12,13 @@ inputs:
 outputs:
   version:
     description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-number }}-${{ inputs.eployment-type }}
+    value: ${{ steps.random-number-generator.outputs.random-number }}-${{ inputs.deployment-type }}
 runs:
   using: "composite"
   steps:
     - run: echo Hello ${{ inputs.who-to-greet }}.
       shell: bash
-    - run: echo Deployment Type - ${{ inputs.eployment-type }}.
+    - run: echo Deployment Type - ${{ inputs.deployment-type }}.
       shell: bash
     - id: random-number-generator
       run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
