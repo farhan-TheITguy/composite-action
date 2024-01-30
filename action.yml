@@ -1,22 +1,24 @@
 name: 'Hello World'
 description: 'Greet someone'
 inputs:
-  who-to-greet:  # id of input
+  who-to-greet:
     description: 'Who to greet'
     required: true
     default: 'World'
-  deploymentType:  # id of input
+  deploymentType:
     description: 'Type of the deployment'
     required: false
     default: 'SNAPSHOT'
 outputs:
   version:
     description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-number }}-${{ inputs.who-to-greet }}
+    value: ${{ steps.random-number-generator.outputs.random-number }}-${{ inputs.deploymentType }}
 runs:
   using: "composite"
   steps:
     - run: echo Hello ${{ inputs.who-to-greet }}.
+      shell: bash
+    - run: echo Deployment Type - ${{ inputs.deploymentType }}.
       shell: bash
     - id: random-number-generator
       run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
